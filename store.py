@@ -1,3 +1,5 @@
+from products import NonStockedProduct
+
 class Store:
     """Represent a store that manages a collection of products."""
 
@@ -50,10 +52,11 @@ class Store:
             if quantity <= 0:
                 raise ValueError("Purchase quantity must be greater than 0!")
 
-            if quantity > product.get_quantity():
-                raise ValueError(
-                    f"Not enough stock for {product.name}. Available: {product.get_quantity()}"
-                )
+            if not isinstance(product, NonStockedProduct):
+                if quantity > product.get_quantity():
+                    raise ValueError(
+                        f"Not enough stock for {product.name}. Available: {product.get_quantity()}"
+                    )
 
         for product, quantity in shopping_list:
             total_price += product.buy(quantity)
