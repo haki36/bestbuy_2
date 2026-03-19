@@ -87,3 +87,34 @@ class Product:
             self.active = False
 
         return float(total_price)
+
+class NonStockedProduct(Product):
+    def __init__(self, name: str, price: float):
+        super().__init__(name, price, 0)
+        self.active = True
+
+    def show(self) -> None:
+        status = "active" if self.active else "inactive"
+        print(f"{self.name} | Price: {self.price} | Quantity: Non-stocked | Status: {status}")
+
+    def buy(self, quantity: int) -> float:
+        if quantity <= 0:
+            raise ValueError("Purchase quantity must be greater than 0!")
+        return float(self.price * quantity)
+
+class LimitedProduct(Product):
+    def __init__(self, name: str, price: float, quantity: int, maximum: int):
+        super().__init__(name, price, quantity)
+        if maximum <= 0:
+            raise ValueError("Maximum must be greater than 0!")
+
+        self.maximum = maximum
+
+    def buy(self, quantity: int) -> float:
+        if quantity > self.maximum:
+            raise ValueError("You cannot buy more than the allowed limit.")
+        return super().buy(quantity)
+
+    def show(self) -> None:
+        status = "active" if self.active else "inactive"
+        print(f"{self.name} | Price: {self.price} | Quantity: {self.quantity} | Max per order: {self.maximum} | Status: {status}")
