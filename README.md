@@ -4,44 +4,43 @@
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 ![Bootcamp](https://img.shields.io/badge/Masterschool-Bootcamp-orange)
 ![Platform](https://img.shields.io/badge/Platform-Terminal-lightgrey)
-> A small **store manager CLI** built with **Python + OOP**.
-> The application allows users to manage store inventory,
-> display available products, calculate stock totals,
-> and place simple customer orders through the terminal.
+> A modular **store management CLI** built with **Python and Object-Oriented Programming (OOP)**.  
+> The application simulates a real-world retail system with support for inventory management, order processing, product variations, and promotional pricing strategies.
 ---
 📌 Overview
 This project demonstrates how to:
-Build an interactive CLI application
-Model products and store logic with classes and objects
-Separate business logic from application flow
-Validate user input and stock values
-Manage active and inactive products
-Process orders and calculate total payment
-Structure a Python project into multiple modules
-The project architecture separates user interaction from
-product and store management logic.
-    User Input (CLI Menu)
-          │
-          ▼
-        main.py
-          │
-          ▼
-      store.py
-          │
-          ▼
-     products.py
-          │
-          ▼
-Terminal Output / Order Result
+Build an interactive Command Line Interface (CLI)
+Design scalable systems using OOP principles
+Apply inheritance and polymorphism for product variations
+Implement business logic separation
+Integrate promotion strategies (discounts)
+Validate user input and handle errors gracefully
+Architecture
+```text
+User Input (CLI Menu)
+        │
+        ▼
+      main.py
+        │
+        ▼
+     store.py
+        │
+        ▼
+   products.py
+        │
+        ▼
+  promotions.py
+        │
+        ▼
+Terminal Output / Order Processing
+```
 ---
 🖥️ Demo Flow
-User starts the program
-A menu is displayed
-User selects an option
-The selected action is executed
-Results are printed in the terminal
-Orders update product stock automatically
-Example:
+Start the application
+Choose an action from the menu
+Interact with the store (list, order, etc.)
+System processes logic and updates stock
+Results are displayed in the terminal
 ```bash
 python main.py
 ```
@@ -54,100 +53,119 @@ Menu:
 ```
 ---
 ✨ Core Features
-Product inventory management with OOP
-List all active products in the store
-Show total quantity of all products
-Make customer orders directly in the terminal
-Automatically reduce stock after purchase
-Deactivate products when quantity reaches zero
-Input validation for invalid menu choices and purchase amounts
-Clean separation of responsibilities across modules
+🛒 Store Functionality
+Display all active products
+Calculate total inventory quantity
+Create and process customer orders
+Automatic stock updates after purchase
+Input validation and error handling
+📦 Product System (OOP)
+Base `Product` class
+`NonStockedProduct` for unlimited items such as software licenses
+`LimitedProduct` for products with a maximum quantity per order
+🎯 Promotion System
+Abstract `Promotion` class
+Supported promotions:
+Percentage discount
+Second item half price
+Buy 2 get 1 free
+Promotions can be assigned dynamically to products
+🧠 Advanced OOP Concepts
+Inheritance
+Polymorphism
+Encapsulation
+Abstract classes
+Strategy Pattern for pricing logic
 ---
 📂 Project Structure
 ```text
 store-manager-cli/
 │
-├── main.py         # CLI menu and user interaction
-├── products.py     # Product class
-├── store.py        # Store class and order handling
+├── main.py         # CLI menu & user interaction
+├── products.py     # Product classes (base + variations)
+├── store.py        # Store logic and order processing
+├── promotions.py   # Promotion strategy classes
+├── test_product.py # Unit tests for Product
 └── README.md
 ```
 ---
 🚀 Installation & Usage
 Requirements
 Python 3.10+
-No external dependencies are required for this project.
----
-Run the Program
+Run the application
 ```bash
 python main.py
 ```
+Run the tests
+```bash
+pytest
+```
+or only:
+```bash
+pytest test_product.py
+```
 ---
 🧾 Example Products
-The store is initialized with these sample products:
+The store is initialized with:
 MacBook Air M2
 Bose QuietComfort Earbuds
 Google Pixel 7
+Windows License (`NonStockedProduct`)
+Shipping (`LimitedProduct`)
 Each product includes:
-name
-price
-quantity
-active / inactive status
+Name
+Price
+Quantity or product type
+Status (`active` / `inactive`)
+Optional promotion
 ---
-🛒 Order Flow
-When the user chooses the order option:
-Active products are displayed
-The user selects a product number
-The user enters the quantity
-The product is added to the shopping list
-The total payment is calculated
-Product quantities are updated
-Example:
+🛒 Order Example
 ```text
 Which product # do you want? 1
 What amount do you want? 2
 Product added to list!
+
+Order made! Total payment: $2175.00
 ```
 ---
 🧠 Technical Concepts Applied
 Concept	Implementation
 CLI interaction	`input()` + menu loop
-OOP	`Product` and `Store` classes
-Encapsulation of logic	methods like `buy()`, `order()`, `get_all_products()`
-Validation	price, quantity, user input, stock checks
-Modular structure	`main.py`, `products.py`, `store.py`
-State management	active / inactive products
-Exception handling	`try/except ValueError`
+OOP	`Product`, `Store`, subclasses
+Inheritance	`NonStockedProduct`, `LimitedProduct`
+Polymorphism	`buy()` and promotion handling
+Strategy Pattern	promotion system
+Validation	input, stock, quantity, limits
+Exception Handling	`ValueError`
+Modular Design	separate Python modules
 ---
 🎓 Learning Objectives
-This exercise practices:
-Structuring Python projects
-Working with classes and objects
-Separating concerns across modules
-Validating data with custom logic
-Handling stock management
-Building terminal-based applications
-Using exceptions for safe program flow
+This project focuses on:
+Structuring Python applications
+Writing reusable and scalable OOP code
+Designing flexible business logic
+Implementing store and inventory scenarios
+Working with inheritance and abstract classes
+Building maintainable CLI applications
 ---
 📈 Portfolio Upgrade Ideas
 Possible improvements:
-Add special product types such as limited or non-stocked products
-Add product categories
-Add discount support
-Add unit tests
+Add database support with SQLite or PostgreSQL
+Build a REST API with Flask or FastAPI
+Add a GUI with Tkinter
 Add logging
-Save products to JSON or SQLite
-Add admin functions to insert or remove products dynamically
-Convert the project into a Flask or FastAPI web app
+Add admin functionality for managing products
+Add more unit tests for `Store` and promotions
+Support multiple promotions per product as an advanced feature
 ---
 🇩🇪 Kurzbeschreibung
-Ein Python-CLI-Projekt zur Verwaltung eines kleinen Shopsystems.
-Die Anwendung basiert auf OOP mit Klassen und Objekten und erlaubt das
-Anzeigen aktiver Produkte, das Berechnen des gesamten Lagerbestands
-sowie das Ausführen von Bestellungen direkt im Terminal.
-Die Produkt- und Store-Logik sind sauber voneinander getrennt, sodass
-das Projekt eine gute Übung für Objektorientierung, Modularisierung
-und Eingabevalidierung ist.
+Ein CLI-basiertes Shopsystem in Python mit Fokus auf Objektorientierung und sauberer Architektur.
+Die Anwendung unterstützt:
+Produktverwaltung
+Bestellprozesse
+verschiedene Produkttypen
+Rabatt- und Aktionssysteme
+Das Projekt demonstriert fortgeschrittene OOP-Konzepte wie Vererbung, Polymorphismus, abstrakte Klassen und das Strategy Pattern.
 ---
 📄 License
 MIT License
